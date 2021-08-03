@@ -6,6 +6,7 @@ import br.com.zupacademy.mercadolivre.model.entities.Categoria;
 import br.com.zupacademy.mercadolivre.model.repositories.CategoriaRepository;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 public class NovaCategoriaRequest {
 
@@ -13,6 +14,7 @@ public class NovaCategoriaRequest {
     @UniqueValue(domainClass = Categoria.class, fieldName = "nome", message = "{validation.uniquevalue.categoria.nome}")
     private String nome;
 
+    @Positive
     @ExistsIdIfNotNull(domainClass = Categoria.class, fieldName = "id",
             message = "{validation.existsIdIfNotNull.categoria.maeId}")
     private Long categoriaMaeId;

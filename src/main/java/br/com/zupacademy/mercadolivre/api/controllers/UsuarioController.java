@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -19,6 +20,7 @@ public class UsuarioController {
     private UsuarioRepository repository;
 
     @PostMapping
+    @Transactional
     public void cadastra(@RequestBody @Valid NovoUsuarioRequest request) {
         Usuario usuario = request.toModel();
         repository.save(usuario);
