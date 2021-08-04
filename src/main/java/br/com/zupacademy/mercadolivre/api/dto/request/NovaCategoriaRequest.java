@@ -34,4 +34,12 @@ public class NovaCategoriaRequest {
         categoria.setCategoriaMae(mae);
         return categoria;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Long getCategoriaMaeId() {
+        return categoriaMaeId;
+    }
 }

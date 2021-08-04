@@ -1,7 +1,7 @@
 package br.com.zupacademy.mercadolivre.api.dto.request;
 
 import br.com.zupacademy.mercadolivre.api.validation.UniqueValue;
-import br.com.zupacademy.mercadolivre.model.entities.SenhaLimpa;
+import br.com.zupacademy.mercadolivre.model.entities.utils.SenhaLimpa;
 import br.com.zupacademy.mercadolivre.model.entities.Usuario;
 
 import javax.validation.constraints.Email;
@@ -25,5 +25,13 @@ public class NovoUsuarioRequest {
 
     public Usuario toModel() {
         return new Usuario(this.login, new SenhaLimpa(this.senha));
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getSenha() {
+        return senha;
     }
 }

@@ -1,4 +1,4 @@
-package br.com.zupacademy.mercadolivre.model.entities;
+package br.com.zupacademy.mercadolivre.model.entities.utils;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.Assert;
