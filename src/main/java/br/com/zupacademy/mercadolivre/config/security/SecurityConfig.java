@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final String[] POST_PUBLIC = {"/usuarios", "/auth"};
-    private final String[] POST_AUTHENTICATED = {"/categorias"};
+    private final String[] POST_AUTHENTICATED = {"/categorias", "/produtos"};
 
     @Autowired
     private UserDetailsService userDetailsService;

@@ -31,13 +31,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
         Optional<String> optionalToken = getToken(conteudoDoHeader);
 
-        boolean valido = false;
-
-        if(optionalToken.isPresent()) {
-            valido = tokenService.isTokenValid(optionalToken.get());
-        }
-
-        if(valido) {
+        if(optionalToken.isPresent() && tokenService.isTokenValid(optionalToken.get())) {
             autenticarCliente(optionalToken.get());
         }
 

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     @Autowired
     private AuthenticationManager authManager;
-@Autowired
-private TokenService tokenService;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping
     public ResponseEntity<JwtResponse> autentica(@RequestBody CredenciaisRequest request) {
