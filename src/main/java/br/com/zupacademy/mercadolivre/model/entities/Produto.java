@@ -8,7 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Produto {
@@ -27,24 +30,24 @@ public class Produto {
     @Min(0)
     private Integer quantidade;
 
-    /**
-     * Map que representará mapa de características usando pares String/String
-     * onde a chave (String) será o nome da característica
-     * e o valor (String) será a descrição da característica
-     */
     @Size(min = 3)
     @NotNull
     @ElementCollection
     @CollectionTable(name = "caracteristica_produto",
             joinColumns = {@JoinColumn(name = "produto_id", referencedColumnName = "id")}
     )
-    @MapKeyColumn(name = "nome_caracterisica")
-    @Column(name = "descricao_caracteristica")
-    private Map<@NotBlank String, @NotBlank String> caracteristicas;
+    private Set<CaracteristicaProduto> caracteristicas;
 
     @NotBlank
     @Length(max = 1000)
     private String descricao;
+
+    @ElementCollection
+    @CollectionTable(name = "imagem_produto",
+            joinColumns = {@JoinColumn(name = "produto_id", referencedColumnName = "id")}
+    )
+    @Column(name = "url", nullable = false)
+    private Set<String> imagens = new HashSet<>();
 
     @NotNull
     @ManyToOne
@@ -60,7 +63,7 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String nome, BigDecimal valor, Integer quantidade, Map<String, String> caracteristicas,
+    public Produto(String nome, BigDecimal valor, Integer quantidade, Set<CaracteristicaProduto> caracteristicas,
                    String descricao, Categoria categoria, Usuario usuario) {
         Assert.isTrue(valor.doubleValue() >= 0.01, "Valor deve ser no mínimo 0.01");
 
@@ -68,8 +71,50 @@ public class Produto {
         this.nome = nome;
         this.valor = valor;
         this.quantidade = quantidade;
-        this.caracteristicas = caracteristicas;
+
         this.descricao = descricao;
         this.categoria = categoria;
+        this.caracteristicas = caracteristicas;
+    }
+
+    public void adicionaImagens(List<String> urlDasImagens) {
+        imagens.addAll(urlDasImagens);
+    }
+
+    public boolean pertenceA(Usuario possivelDono) {
+        return this.usuario.equals(possivelDono);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(id, produto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", valor=" + valor +
+                ", quantidade=" + quantidade +
+                ", caracteristicas=" + caracteristicas +
+                ", descricao='" + descricao + '\'' +
+                ", imagens=" + imagens +
+                ", categoria=" + categoria +
+                ", usuario=" + usuario +
+                ", criadoEm=" + criadoEm +
+                '}';
     }
 }

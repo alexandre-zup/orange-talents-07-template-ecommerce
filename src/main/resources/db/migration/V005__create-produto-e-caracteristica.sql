@@ -15,8 +15,8 @@ CREATE TABLE produto (
 
 CREATE TABLE caracteristica_produto (
     produto_id bigint NOT NULL,
-    descricao_caracteristica VARCHAR(255) NOT NULL,
-    nome_caracterisica VARCHAR(255) NOT NULL,
-    PRIMARY KEY (produto_id, nome_caracterisica),
+    descricao VARCHAR(255) NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    PRIMARY KEY (produto_id, nome),
     CONSTRAINT fk_caracteristica_produto_produto_id FOREIGN KEY (produto_id) REFERENCES produto(id)
 );
