@@ -3,6 +3,7 @@ package br.com.zupacademy.mercadolivre.model.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Entity
 public class Categoria {
@@ -43,10 +44,10 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return "Categoria{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", categoriaMae=" + categoriaMae +
-                '}';
+        return new StringJoiner(", ", Categoria.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("nome='" + nome + "'")
+                .add("categoriaMae=" + categoriaMae)
+                .toString();
     }
 }

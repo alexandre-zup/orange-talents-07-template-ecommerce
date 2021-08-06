@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Entity
 public class Usuario implements UserDetails {
@@ -104,12 +105,12 @@ public class Usuario implements UserDetails {
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", senha='" + senha + '\'' +
-                ", criadoEm=" + criadoEm +
-                ", perfil=" + perfil +
-                '}';
+        return new StringJoiner(", ", Usuario.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("login='" + login + "'")
+                .add("senha='" + senha + "'")
+                .add("criadoEm=" + criadoEm)
+                .add("perfil=" + perfil)
+                .toString();
     }
 }

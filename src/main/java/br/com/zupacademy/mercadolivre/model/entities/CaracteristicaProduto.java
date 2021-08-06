@@ -2,6 +2,7 @@ package br.com.zupacademy.mercadolivre.model.entities;
 
 import javax.persistence.Embeddable;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Embeddable
 public class CaracteristicaProduto {
@@ -28,5 +29,13 @@ public class CaracteristicaProduto {
     @Override
     public int hashCode() {
         return Objects.hash(nome);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", CaracteristicaProduto.class.getSimpleName() + "[", "]")
+                .add("nome='" + nome + "'")
+                .add("descricao='" + descricao + "'")
+                .toString();
     }
 }

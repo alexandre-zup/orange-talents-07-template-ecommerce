@@ -8,10 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Produto {
@@ -49,6 +46,9 @@ public class Produto {
     @Column(name = "url", nullable = false)
     private Set<String> imagens = new HashSet<>();
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private List<AvalicaoProduto> avalicaoes = new ArrayList<>();
+
     @NotNull
     @ManyToOne
     private Categoria categoria;
@@ -81,6 +81,10 @@ public class Produto {
         imagens.addAll(urlDasImagens);
     }
 
+    public void adicionaAvaliacao(AvalicaoProduto avalicaoProduto) {
+        this.avalicaoes.add(avalicaoProduto);
+    }
+
     public boolean pertenceA(Usuario possivelDono) {
         return this.usuario.equals(possivelDono);
     }
@@ -104,17 +108,17 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", valor=" + valor +
-                ", quantidade=" + quantidade +
-                ", caracteristicas=" + caracteristicas +
-                ", descricao='" + descricao + '\'' +
-                ", imagens=" + imagens +
-                ", categoria=" + categoria +
-                ", usuario=" + usuario +
-                ", criadoEm=" + criadoEm +
-                '}';
+        return new StringJoiner(", ", Produto.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("nome='" + nome + "'")
+                .add("valor=" + valor)
+                .add("quantidade=" + quantidade)
+                .add("caracteristicas=" + caracteristicas)
+                .add("descricao='" + descricao + "'")
+                .add("imagens=" + imagens)
+                .add("categoria=" + categoria)
+                .add("usuario=" + usuario)
+                .add("criadoEm=" + criadoEm)
+                .toString();
     }
 }

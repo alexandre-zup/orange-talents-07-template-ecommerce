@@ -1,7 +1,9 @@
 package br.com.zupacademy.mercadolivre.api.controllers;
 
+import br.com.zupacademy.mercadolivre.api.dto.request.NovaAvaliacaoRequest;
 import br.com.zupacademy.mercadolivre.api.dto.request.NovasImagensRequest;
 import br.com.zupacademy.mercadolivre.api.dto.request.NovoProdutoRequest;
+import br.com.zupacademy.mercadolivre.model.entities.AvalicaoProduto;
 import br.com.zupacademy.mercadolivre.model.entities.Produto;
 import br.com.zupacademy.mercadolivre.model.entities.Usuario;
 import br.com.zupacademy.mercadolivre.model.repositories.CategoriaRepository;
@@ -38,7 +40,7 @@ public class ProdutoController {
 
     @PostMapping("/{id}/imagens")
     @Transactional
-    public ResponseEntity adicionaImagens(@Valid NovasImagensRequest request, @PathVariable Long id,
+    public ResponseEntity<Void> adicionaImagens(@Valid NovasImagensRequest request, @PathVariable Long id,
                                           @AuthenticationPrincipal Usuario usuarioLogado) {
         Optional<Produto> optionalProduto = produtoRepository.findById(id);
 
@@ -55,6 +57,22 @@ public class ProdutoController {
         List<String> links = uploader.envia(request.getImagens());
 
         produto.adicionaImagens(links);
+        produtoRepository.save(produto);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/avaliacoes")
+    @Transactional
+    public ResponseEntity<Void> adicionaAvaliacao(@RequestBody @Valid NovaAvaliacaoRequest request,
+                                                  @PathVariable Long id, @AuthenticationPrincipal Usuario usuario) {
+        Optional<Produto> optionalProduto = produtoRepository.findById(id);
+
+        if(optionalProduto.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        Produto produto = optionalProduto.get();
+        AvalicaoProduto avalicaoProduto = request.toModel(produto, usuario);
+        produto.adicionaAvaliacao(avalicaoProduto);
         produtoRepository.save(produto);
         return ResponseEntity.ok().build();
     }
