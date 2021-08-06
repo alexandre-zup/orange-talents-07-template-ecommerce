@@ -1,4 +1,4 @@
-package br.com.zupacademy.mercadolivre.uploaders;
+package br.com.zupacademy.mercadolivre.services.uploaders;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

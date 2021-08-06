@@ -49,6 +49,9 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private List<AvalicaoProduto> avalicaoes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private List<PerguntaProduto> perguntas = new ArrayList<>();
+
     @NotNull
     @ManyToOne
     private Categoria categoria;
@@ -85,8 +88,16 @@ public class Produto {
         this.avalicaoes.add(avalicaoProduto);
     }
 
+    public void adicionaPergunta(PerguntaProduto pergunta) {
+        this.perguntas.add(pergunta);
+    }
+
     public boolean pertenceA(Usuario possivelDono) {
         return this.usuario.equals(possivelDono);
+    }
+
+    public Usuario dono() {
+        return this.usuario;
     }
 
     public Long getId() {
