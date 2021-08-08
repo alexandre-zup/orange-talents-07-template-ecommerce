@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final String[] POST_PUBLIC = {"/usuarios", "/auth"};
     private final String[] POST_AUTHENTICATED = {"/categorias", "/produtos/**"};
+    private final String[] GET_AUTHENTICATED = {"/produtos/**"};
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -53,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, POST_PUBLIC).permitAll()
                 .antMatchers(HttpMethod.POST, POST_AUTHENTICATED).authenticated()
+                .antMatchers(HttpMethod.GET, GET_AUTHENTICATED).authenticated()
                 .anyRequest().denyAll();
 
         http.addFilterBefore(new AuthFilter(usuarioRepository, tokenService), UsernamePasswordAuthenticationFilter.class);

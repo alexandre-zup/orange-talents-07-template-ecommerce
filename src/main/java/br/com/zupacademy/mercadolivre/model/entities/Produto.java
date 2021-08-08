@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Entity
 public class Produto {
@@ -100,8 +102,36 @@ public class Produto {
         return this.usuario;
     }
 
+    public <T> Set<T> mapeiaCaracteristicas(Function<CaracteristicaProduto, T> funcaoMapeadora) {
+        return this.caracteristicas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
+    public <T> Set<T> mapeiaImagens(Function<String, T> funcaoMapeadora) {
+        return this.imagens.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
+    public <T> Set<T> mapeiaAvaliacoes(Function<AvalicaoProduto, T> funcaoMapeadora) {
+        return this.avalicaoes.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
+    public <T> Set<T> mapeiaPerguntas(Function<PerguntaProduto, T> funcaoMapeadora) {
+        return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     @Override

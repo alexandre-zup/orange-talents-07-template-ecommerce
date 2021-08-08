@@ -59,6 +59,18 @@ public class AvalicaoProduto {
         this.usuario = usuario;
     }
 
+    public Integer getNota() {
+        return nota;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

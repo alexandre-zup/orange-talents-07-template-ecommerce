@@ -1,11 +1,10 @@
 package br.com.zupacademy.mercadolivre.api.controllers;
 
 import br.com.zupacademy.mercadolivre.api.dto.request.NovaAvaliacaoRequest;
-import br.com.zupacademy.mercadolivre.api.dto.request.NovoProdutoRequest;
+import br.com.zupacademy.mercadolivre.api.dto.response.detalheproduto.DetalheProdutoResponse;
 import br.com.zupacademy.mercadolivre.model.entities.AvalicaoProduto;
 import br.com.zupacademy.mercadolivre.model.entities.Produto;
 import br.com.zupacademy.mercadolivre.model.entities.Usuario;
-import br.com.zupacademy.mercadolivre.model.repositories.CategoriaRepository;
 import br.com.zupacademy.mercadolivre.model.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +20,6 @@ import java.util.Optional;
 public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;
-    @Autowired
-    private CategoriaRepository categoriaRepository;
-
-    @PostMapping
-    @Transactional
-    public void cadastra(@RequestBody @Valid NovoProdutoRequest request, @AuthenticationPrincipal Usuario usuarioLogado) {
-        Produto produto = request.toModel(categoriaRepository, usuarioLogado);
-        produtoRepository.save(produto);
-    }
 
     @PostMapping("/{id}/avaliacoes")
     @Transactional
@@ -45,5 +35,16 @@ public class ProdutoController {
         produto.adicionaAvaliacao(avalicaoProduto);
         produtoRepository.save(produto);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalheProdutoResponse> detalha(@PathVariable Long id) {
+        Optional<Produto> produtoOptional = produtoRepository.findById(id);
+
+        if(produtoOptional.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        DetalheProdutoResponse response = new DetalheProdutoResponse(produtoOptional.get());
+        return ResponseEntity.ok().body(response);
     }
 }

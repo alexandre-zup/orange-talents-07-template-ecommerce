@@ -48,6 +48,14 @@ public class PerguntaProduto {
         this.produto = produto;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public LocalDateTime getCriadaEm() {
+        return criadaEm;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
