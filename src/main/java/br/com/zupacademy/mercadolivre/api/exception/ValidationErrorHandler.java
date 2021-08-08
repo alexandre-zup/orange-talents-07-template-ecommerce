@@ -25,10 +25,20 @@ public class ValidationErrorHandler {
 
 
     @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<StandardErrorOutputDto> handleMethodArgumentNotValidException(ResponseStatusException ex) {
-        StandardErrorOutputDto error = new StandardErrorOutputDto(ex);
+    public ResponseEntity<ValidationErrorsOutputDto> handleMethodArgumentNotValidException(ResponseStatusException ex) {
+        ValidationErrorsOutputDto errors = new ValidationErrorsOutputDto();
+        errors.addError(ex.getReason());
 
-        return ResponseEntity.status(error.getStatus()).body(error);
+
+        return ResponseEntity.status(ex.getStatus()).body(errors);
+    }
+
+    @ExceptionHandler(MinhaException.class)
+    public ResponseEntity<ValidationErrorsOutputDto> handleMethodArgumentNotValidException(MinhaException ex) {
+        ValidationErrorsOutputDto error = new ValidationErrorsOutputDto();
+        error.addError(ex.getMessage());
+
+        return ResponseEntity.status(ex.getStatus()).body(error);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -51,9 +61,9 @@ public class ValidationErrorHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public StandardErrorOutputDto handleBindException(MethodArgumentTypeMismatchException ex) {
-        StandardErrorOutputDto error = new StandardErrorOutputDto(ex, HttpStatus.BAD_REQUEST);
-
+    public ValidationErrorsOutputDto handleBindException(MethodArgumentTypeMismatchException ex) {
+        ValidationErrorsOutputDto error = new ValidationErrorsOutputDto();
+        error.addError(ex.getMessage());
         return error;
     }
 

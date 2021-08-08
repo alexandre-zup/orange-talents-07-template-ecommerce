@@ -82,6 +82,20 @@ public class Produto {
         this.caracteristicas = caracteristicas;
     }
 
+    public String obterContatoDono() {
+        return this.usuario.getUsername();
+    }
+
+    public boolean reduzQuantidade(@Positive int quantidadeParaReduzir) {
+        Assert.isTrue(quantidadeParaReduzir > 0, "Quantidade deve ser maior que 0");
+
+        if(this.quantidade < quantidadeParaReduzir)
+            return false;
+
+        this.quantidade -= quantidadeParaReduzir;
+        return true;
+    }
+
     public void adicionaImagens(List<String> urlDasImagens) {
         imagens.addAll(urlDasImagens);
     }
