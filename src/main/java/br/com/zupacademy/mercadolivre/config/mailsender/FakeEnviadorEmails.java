@@ -1,14 +1,12 @@
-package br.com.zupacademy.mercadolivre.services.mailsenders;
+package br.com.zupacademy.mercadolivre.config.mailsender;
 
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
-@Service
-public class EnviadorDeEmails implements MailSender {
+public class FakeEnviadorEmails implements MailSender {
 
     @Override
     public void send(SimpleMailMessage simpleMessage) throws MailException {

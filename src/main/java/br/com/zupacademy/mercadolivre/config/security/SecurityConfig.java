@@ -20,9 +20,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final String[] POST_PUBLIC = {"/usuarios", "/auth"};
-    private final String[] POST_AUTHENTICATED = {"/categorias", "/produtos/**", "/compras"};
     private final String[] GET_AUTHENTICATED = {"/produtos/**"};
+    private final String[] POST_AUTHENTICATED = {"/categorias", "/produtos/**", "/compras"};
+    private final String[] POST_PUBLIC = {"/usuarios", "/auth", "/retorno-paypal", "/retorno-pagseguro",
+            "/notas-fiscais", "/ranking-vendas"};
 
     @Autowired
     private UserDetailsService userDetailsService;
