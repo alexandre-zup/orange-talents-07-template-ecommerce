@@ -1,6 +1,6 @@
 package br.com.zupacademy.mercadolivre.model.entities.enums;
 
-public enum StatusCompra {
-    INICIADA,
-    PAGA
+public enum StatusPagamento {
+    ERRO,
+    SUCESSO
 }

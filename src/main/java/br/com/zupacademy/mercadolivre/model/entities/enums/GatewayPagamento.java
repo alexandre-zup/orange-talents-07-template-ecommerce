@@ -5,14 +5,14 @@ public enum GatewayPagamento {
         @Override
         public String obterUrlPagamento(Long compraId, String baseUrl) {
             return "https://paypal.com?buyerId=" + compraId +
-                    "&redirectUrl=" + baseUrl + "/retorno-paypal/" + compraId;
+                    "&redirectUrl=" + baseUrl + "/retorno-paypal";
         }
     }
     , PAGSEGURO {
         @Override
         public String obterUrlPagamento(Long compraId, String urlBase) {
             return "https://pagseguro.com?returnId=" + compraId +
-                    "&redirectUrl=" + urlBase + "/retorno-pagseguro/" + compraId;
+                    "&redirectUrl=" + urlBase + "/retorno-pagseguro";
         }
     };
 

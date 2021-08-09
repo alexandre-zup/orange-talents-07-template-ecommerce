@@ -60,7 +60,7 @@ public class CompraController {
         String urlBase = uriComponentsBuilder.toUriString();
 
         HttpHeaders location = new HttpHeaders();
-        location.add("Location", request.getGatewayPagamento().obterUrlPagamento(compra.getId(), urlBase));
+        location.add("Location", compra.obterUrlDePagamento(urlBase));
         return new ResponseEntity<Void>(location, HttpStatus.FOUND);
     }
 }

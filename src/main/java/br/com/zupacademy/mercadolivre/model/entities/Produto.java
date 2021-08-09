@@ -148,6 +148,10 @@ public class Produto {
         return descricao;
     }
 
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
