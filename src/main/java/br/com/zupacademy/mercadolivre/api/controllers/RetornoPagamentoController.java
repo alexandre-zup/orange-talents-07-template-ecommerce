@@ -1,13 +1,13 @@
 package br.com.zupacademy.mercadolivre.api.controllers;
 
-import br.com.zupacademy.mercadolivre.api.dto.request.retornopagamento.RetornoPagamento;
-import br.com.zupacademy.mercadolivre.api.dto.request.retornopagamento.RetornoPagseguroRequest;
-import br.com.zupacademy.mercadolivre.api.dto.request.retornopagamento.RetornoPayPalRequest;
+import br.com.zupacademy.mercadolivre.api.dto.request.retorno_pagamento.RetornoPagamento;
+import br.com.zupacademy.mercadolivre.api.dto.request.retorno_pagamento.RetornoPagseguroRequest;
+import br.com.zupacademy.mercadolivre.api.dto.request.retorno_pagamento.RetornoPayPalRequest;
 import br.com.zupacademy.mercadolivre.api.exception.MinhaException;
 import br.com.zupacademy.mercadolivre.model.entities.Compra;
 import br.com.zupacademy.mercadolivre.model.entities.Pagamento;
 import br.com.zupacademy.mercadolivre.model.repositories.CompraRepository;
-import br.com.zupacademy.mercadolivre.services.eventoscompra.EventosNovoPagamento;
+import br.com.zupacademy.mercadolivre.services.eventos_compra.EventosNovoPagamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;

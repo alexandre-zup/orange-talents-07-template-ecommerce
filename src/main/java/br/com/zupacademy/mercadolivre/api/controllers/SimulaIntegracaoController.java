@@ -1,7 +1,7 @@
 package br.com.zupacademy.mercadolivre.api.controllers;
 
-import br.com.zupacademy.mercadolivre.api.dto.request.simulaintegracao.NFRequest;
-import br.com.zupacademy.mercadolivre.api.dto.request.simulaintegracao.RankingVendasRequest;
+import br.com.zupacademy.mercadolivre.api.dto.request.simula_integracao.NFRequest;
+import br.com.zupacademy.mercadolivre.api.dto.request.simula_integracao.RankingVendasRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

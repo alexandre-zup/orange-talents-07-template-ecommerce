@@ -1,4 +1,4 @@
-package br.com.zupacademy.mercadolivre.api.dto.response.detalheproduto;
+package br.com.zupacademy.mercadolivre.api.dto.response.detalhe_produto;
 
 import br.com.zupacademy.mercadolivre.model.entities.Produto;
 

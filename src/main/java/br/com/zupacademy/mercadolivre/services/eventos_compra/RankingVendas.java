@@ -1,4 +1,4 @@
-package br.com.zupacademy.mercadolivre.services.eventoscompra;
+package br.com.zupacademy.mercadolivre.services.eventos_compra;
 
 import br.com.zupacademy.mercadolivre.model.entities.Compra;
 import org.springframework.stereotype.Service;

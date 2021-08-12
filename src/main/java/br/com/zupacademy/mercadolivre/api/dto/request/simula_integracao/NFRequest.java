@@ -1,4 +1,4 @@
-package br.com.zupacademy.mercadolivre.api.dto.request.simulaintegracao;
+package br.com.zupacademy.mercadolivre.api.dto.request.simula_integracao;
 
 import javax.validation.constraints.NotNull;
 

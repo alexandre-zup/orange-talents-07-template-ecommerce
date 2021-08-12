@@ -1,4 +1,4 @@
-package br.com.zupacademy.mercadolivre.config.mailsender;
+package br.com.zupacademy.mercadolivre.config.mail_sender;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

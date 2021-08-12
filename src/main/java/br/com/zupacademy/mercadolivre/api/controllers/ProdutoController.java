@@ -1,7 +1,7 @@
 package br.com.zupacademy.mercadolivre.api.controllers;
 
 import br.com.zupacademy.mercadolivre.api.dto.request.NovaAvaliacaoRequest;
-import br.com.zupacademy.mercadolivre.api.dto.response.detalheproduto.DetalheProdutoResponse;
+import br.com.zupacademy.mercadolivre.api.dto.response.detalhe_produto.DetalheProdutoResponse;
 import br.com.zupacademy.mercadolivre.model.entities.AvalicaoProduto;
 import br.com.zupacademy.mercadolivre.model.entities.Produto;
 import br.com.zupacademy.mercadolivre.model.entities.Usuario;

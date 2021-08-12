@@ -1,4 +1,4 @@
-package br.com.zupacademy.mercadolivre.api.dto.request.retornopagamento;
+package br.com.zupacademy.mercadolivre.api.dto.request.retorno_pagamento;
 
 import br.com.zupacademy.mercadolivre.api.validation.ExistsId;
 import br.com.zupacademy.mercadolivre.model.entities.Compra;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.StringJoiner;
 
-public class RetornoPagseguroRequest implements RetornoPagamento {
+public class RetornoPayPalRequest implements RetornoPagamento {
     @NotNull
     @Positive
     @ExistsId(domainClass = Compra.class, fieldName = "id")
@@ -27,11 +27,11 @@ public class RetornoPagseguroRequest implements RetornoPagamento {
     private StatusPagamento status;
 
 
-    public RetornoPagseguroRequest(Long idCompra, String idPagamento, StatusPagamento status) {
+    public RetornoPayPalRequest(Long idCompra, String idPagamento, int status) {
         this.idCompra = idCompra;
         this.idPagamento = idPagamento;
-        this.gateway = GatewayPagamento.PAGSEGURO;
-        this.status = status;
+        this.gateway = GatewayPagamento.PAYPAL;
+        this.status = status == 1 ? StatusPagamento.SUCESSO : StatusPagamento.ERRO;
     }
 
     @Override
@@ -54,11 +54,11 @@ public class RetornoPagseguroRequest implements RetornoPagamento {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", RetornoPagseguroRequest.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", RetornoPayPalRequest.class.getSimpleName() + "[", "]")
                 .add("idCompra=" + idCompra)
                 .add("idPagamento='" + idPagamento + "'")
-                .add("gateway=" + gateway)
                 .add("status=" + status)
+                .add("gateway=" + gateway)
                 .toString();
     }
 }
