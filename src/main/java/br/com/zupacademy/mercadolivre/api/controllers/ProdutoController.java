@@ -6,6 +6,7 @@ import br.com.zupacademy.mercadolivre.model.entities.AvalicaoProduto;
 import br.com.zupacademy.mercadolivre.model.entities.Produto;
 import br.com.zupacademy.mercadolivre.model.entities.Usuario;
 import br.com.zupacademy.mercadolivre.model.repositories.ProdutoRepository;
+import io.opentracing.Tracer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +21,8 @@ import java.util.Optional;
 public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;
+    @Autowired
+    private Tracer tracer;
 
     @PostMapping("/{id}/avaliacoes")
     @Transactional
@@ -38,7 +41,9 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetalheProdutoResponse> detalha(@PathVariable Long id) {
+    public ResponseEntity<DetalheProdutoResponse> detalha(@PathVariable Long id, @AuthenticationPrincipal Usuario usuario) {
+        tracer.activeSpan().setTag("produto.id", id);
+        tracer.activeSpan().setTag("usuario.email", usuario.getUsername());
         Optional<Produto> produtoOptional = produtoRepository.findById(id);
 
         if(produtoOptional.isEmpty())
